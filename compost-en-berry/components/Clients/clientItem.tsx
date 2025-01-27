@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import './client.css'
         
 const sentences = [
     'Installation de composteurs partagés (en pied d’immeuble, de quartier, dans les cimetières…)',
@@ -15,19 +16,18 @@ const sentences = [
     'Animation pédagogique en milieu scolaire, tout niveau',
 ]
 
-export default function ClientItem() {
+export default function ClientItem({backGroundColorClass}) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <div className="h-screen w-ful flex">
-        <div className="relative w-80 h-auto my-20">
+    <div className="card-size justify-center flex drop-shadow-xl">
+        <div className="relative w-full h-auto my-2">
             <div 
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 className={cn(
-                "relative overflow-hidden rounded-xl transition-all duration-300 ease-in-out",
+                `relative overflow-scroll pb-4 scale-95 shadow-2xl rounded-xl transition-all duration-300 ease-in-out`,
                 " w-full h-full", // Default size
-                isHovered ? "scale-125 shadow-2xl" : "scale-75" // Grow on hover
                 )}
             >
                 {/* Background Image */}
@@ -43,7 +43,7 @@ export default function ClientItem() {
                 {/* Text Section */}
                 <div 
                 className={cn(
-                    "absolute bottom-0 left-0 right-0 bg-green-berry-100 text-colors-berry-green-l",
+                    `absolute bottom-0 left-0 right-0 ${backGroundColorClass} text-colors-berry-green-l`,
                     "transition-all duration-300 ease-in-out",
                     isHovered ? "h-3/4" : "h-1/3" // Grow text section on hover
                 )}
@@ -54,11 +54,11 @@ export default function ClientItem() {
                             Pour les collectivités
                             </h3>
                         </span>
-                        <div className={cn("text-center text-sm overflow-scroll",isHovered ? "hidden" : "font-medium")}>
-                            <p>En savoir plus</p>   
+                        <div className={cn("text-center text-base",isHovered ? "hidden" : "font-medium")}>
+                            <p className="pt-8">En savoir plus</p>   
                         </div>
-                        <div className={cn("text-left text-xs overflow-scroll",isHovered ? "font-light" : "hidden")}>
-                            <ul className="ml-8 mr-4 list-disc">
+                        <div className={cn("text-left text-sm",isHovered ? "font-light" : "hidden")}>
+                            <ul className="ml-8 mr-4 pb-2 list-disc">
                                 {sentences.map((sentence, index) => (
                                     <li className="mb-2" key={`${sentence}-${index}`}>{sentence}</li>
                                 ))}

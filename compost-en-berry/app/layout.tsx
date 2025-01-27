@@ -1,7 +1,16 @@
-import Header from "../components/Header/header"
-import PartnersScroll from "@/components/PartnersScroll/partnersScroll"
+import { Metadata } from "next"
 
 import './globals.css'
+
+export const metadata: Metadata = {
+  title: {
+    default: "Compost'en Berry",
+    template: "%s | Compost'en Berry"
+  },
+  icons: {
+    icon: '/app/favicon.ico'
+  }
+}
 
 export default function DashboardLayout({
   children,
@@ -11,13 +20,7 @@ export default function DashboardLayout({
   return (
     <html lang="fr">
       <body>
-        <Header />
-        {/* Layout UI */}
-        {/* Place children where you want to render a page or nested layout */}
-        <main>
           {children}
-          <PartnersScroll />
-        </main>
       </body>
     </html>
   )

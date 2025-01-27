@@ -2,15 +2,23 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import logo from '../../public/logo-berry.png'
 import { useState, useEffect, useCallback } from 'react'
 import { cn } from '@/lib/utils'
+import { Button } from '../ui/button'
+import { motion, AnimatePresence } from 'framer-motion'
 
+// Define the sections for navigation
+const NAV_SECTIONS = [
+  { id: 'accueil', label: 'Accueil' },
+  { id: 'contact', label: 'Contact' }
+]
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY
@@ -39,6 +47,19 @@ export default function Header() {
   }, [handleScroll])
 
 
+  // Smooth scroll function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+      setIsMenuOpen(false) // Close mobile menu after selection
+    }
+  }
+
+
   return (
     // className="top-0 z-50 bg-white shadow-sm"
     <header 
@@ -58,35 +79,73 @@ export default function Header() {
           />
         </Link>
 
-        {/* Navigation for larger screens */}
-        <nav className="hidden md:flex items-center space-x-6">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex space-x-6">
+          {NAV_SECTIONS.map((section) => (
+            <div 
+              key={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className="text-sm font-medium cursor-pointer text-gray-700 hover:text-green-berry-100 transition-colors py-2.5"
+            >
+              {section.label}
+            </div>
+          ))}
           <Link 
-            href="/" 
-            className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-          >
-            Accueil
+            href="/actualites"
+            className="text-sm font-medium cursor-pointer text-gray-700 hover:text-green-berry-100 transition-colors py-2.5">
+            Nos actualités
           </Link>
-          <Link 
-            href="/contact" 
-            className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+          <Button 
+            type="button" 
+            onClick={() => scrollToSection('joinus')}
+            className="text-white bg-green-berry-100 hover:bg-green-berry-200 focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
-            Contact
-          </Link>
-          <Link 
-            href="/presse" 
-            className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-          >
-            La presse en parle!
-          </Link>
-          <button type="button" className="text-white bg-green-berry-100 hover:bg-green-berry-200 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">Rejoignez-nous</button>
+            Rejoignez-nous
+          </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
-          <div>
-            <Menu className="h-6 w-6" />
-          </div>
+          <Button 
+            variant="outline" 
+            size="icon"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </Button>
+
         </div>
+
+        <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, x: 20 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: -20, x: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="fixed top-16 right-4 z-40 bg-white shadow-lg rounded-lg border"
+          >
+            <div className="flex flex-col p-4 space-y-2 min-w-[200px] cursor-pointer">
+            
+                {NAV_SECTIONS.map((section) => (
+                  <div 
+                    key={section.id}
+                    onClick={() => scrollToSection(section.id)}
+                    className="text-sm font-medium text-gray-700 hover:text-green-berry-100 transition-colors py-2.5"
+                  >
+                  {section.label}
+                  </div>
+              ))}
+              <Link 
+                href="/actualites"
+                className="text-sm font-medium cursor-pointer text-gray-700 hover:text-green-berry-100 transition-colors py-2.5">
+                Nos actualités
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       </div>
     </header>
   )

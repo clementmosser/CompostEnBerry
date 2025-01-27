@@ -20,9 +20,21 @@ export default {
   				'100': '#F3F6E3',
   				'200': '#E3E6D0'
   			},
+			'yellow-berry': {
+  				'100': '#EBB04E',
+  				'200': '#FFC25C'
+  			},
+			'beige-berry': {
+  				'100': '#F2E9D9',
+  				'200': '#E3DBCC'
+  			},
+			'helloasso': "#2E2F5E",
 			colors: {
 				'berry-green': '#10A29A',
-				'berry-green-l': "#F3F6E3"
+				'berry-green-l': "#F3F6E3",
+				'berry-yellow' : '#EBB04E',
+				'berry-beige' : '#F2E9D9',
+				'helloasso': "#2E2F5E",
 			},
   			card: {
   				DEFAULT: 'hsl(var(--card))',

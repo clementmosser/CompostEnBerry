@@ -18,31 +18,34 @@ export default function PartnersScroll() {
   return (
     <div>
         <Strip 
-          normal="i.els nous font"
+          normal="i.els nous font "
           wrap="confiance"
-        >
-        </Strip>
-        <div className="w-full overflow-x-scroll py-8">
+          bgColor= "bg-green-berry-100"
+          txtColor= "text-yellow-berry-100"
+          bgWrap= "bg-yellow-berry-100"
+          bgTxtWrap= "text-green-berry-100" 
+        />
+        <div className="w-full overflow-x-hidden py-12">
             <div className="flex animate-scroll gap-16 whitespace-nowrap">  
             {logos.map((logo, index) => (
                 <Image 
-                key={index} 
-                src={logo} 
-                alt={`Logo ${index + 1}`} 
-                width={100} 
-                height={150} 
-                className="grayscale h-14 m-auto size-full opacity-50 transition-all hover:grayscale-0 hover:opacity-100"
+                  key={index} 
+                  src={logo} 
+                  alt={`Logo ${index + 1}`} 
+                  width={100} 
+                  height={150} 
+                  className="h-20 m-auto size-full transition-all hover:grayscale hover:opacity-50"
                 />
             ))}
             {/* Duplicate logos for infinite scroll effect */}
             {logos.map((logo, index) => (
                 <Image 
-                key={`duplicate-${index}`} 
-                src={logo} 
-                alt={`Logo ${index + 1}`} 
-                width={100} 
-                height={100} 
-                className="grayscale m-auto size-full opacity-50 transition-all hover:grayscale-0 hover:opacity-100"
+                  key={`duplicate-${index}`} 
+                  src={logo} 
+                  alt={`Logo ${index + 1}`} 
+                  width={100} 
+                  height={100} 
+                  className="h-20 m-auto size-full transition-all hover:grayscale hover:opacity-50"
                 />
             ))}
             </div>
