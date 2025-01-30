@@ -28,6 +28,10 @@ export default {
   				'100': '#F2E9D9',
   				'200': '#E3DBCC'
   			},
+			'orange-berry': {
+  				'100': '#EE964F',
+  				'200': '#E08C48'
+  			},
 			'helloasso': "#2E2F5E",
 			colors: {
 				'berry-green': '#10A29A',

@@ -3,12 +3,25 @@
 import Image from 'next/image'
 import Strip from '../Strip/strip'
 import { useState } from 'react'
+import { supabase } from '@/lib/supabase/client'
+
+// Get leaflets images
+const { data :img1 } = supabase.storage.from('images').getPublicUrl('leaflets/depliant-1.jpg')
+const { data :img2 } = supabase.storage.from('images').getPublicUrl('leaflets/depliant-2.jpg')
+
+
 
 export default function Leaflets() {
   const [isFullScreen, setIsFullScreen] = useState(false)
+  const [isFullScreen2, setIsFullScreen2] = useState(false)
+
 
   const toggleFullScreen = () => {
     setIsFullScreen(!isFullScreen)
+  }
+
+  const toggleFullScreen2 = () => {
+    setIsFullScreen2(!isFullScreen2)
   }
 
   return (
@@ -51,7 +64,7 @@ export default function Leaflets() {
       >
         {/* Image */}
         <Image 
-          src="/depliant-1.jpg?height=800&width=600" 
+          src={img1.publicUrl}
           alt="Leaflet Image 1"
           fill
           className="
@@ -80,7 +93,7 @@ export default function Leaflets() {
         >
           <div className="relative w-full h-full max-w-[95vw] max-h-[95vh]">
             <Image 
-              src="/depliant-1.jpg?height=800&width=600" 
+              src={img1.publicUrl}
               alt="Prospectus Image Full Screen"
               fill
               className="object-contain"
@@ -117,11 +130,11 @@ export default function Leaflets() {
           cursor-pointer 
           group
         "
-        onClick={toggleFullScreen}
+        onClick={toggleFullScreen2}
       >
         {/* Image */}
         <Image 
-          src="/depliant-2.jpg?height=800&width=600" 
+          src={img2.publicUrl}
           alt="Leaflet Image 1"
           fill
           className="
@@ -134,7 +147,7 @@ export default function Leaflets() {
       </div>
 
       {/* Full Screen Overlay */}
-      {isFullScreen && (
+      {isFullScreen2 && (
         <div 
           className="
             fixed 
@@ -146,11 +159,11 @@ export default function Leaflets() {
             justify-center 
             p-8
           "
-          onClick={toggleFullScreen}
+          onClick={toggleFullScreen2}
         >
           <div className="relative w-full h-full max-w-[95vw] max-h-[95vh]">
             <Image 
-              src="/depliant-2.jpg?height=800&width=600" 
+              src={img2.publicUrl}
               alt="Prospectus Image Full Screen"
               fill
               className="object-contain"

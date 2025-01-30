@@ -1,7 +1,6 @@
 'use client'
 
 import Image from "next/image"
-import background from "../public/logo-fond-terre.jpeg"
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useRef } from 'react'
@@ -13,6 +12,10 @@ import ClientGrid from "@/components/Clients/clientGrid"
 import Helloasso from "@/components/Helloasso/helloasso"
 import Header from "@/components/Header/header"
 import Footer from "@/components/Footer/footer"
+import { supabase } from "@/lib/supabase/client"
+
+// Get prospectus image
+const { data : background } = supabase.storage.from('images').getPublicUrl('background/logo-fond-terre.jpeg')
 
 export default function Page() {
   const targetRef = useRef<HTMLDivElement>(null)
@@ -33,7 +36,7 @@ export default function Page() {
         <div id="accueil" className="bg-fixed h-screen relative w-full overflow-hidden">
           {/* Background Image */}
           <Image 
-            src={background} 
+            src={background.publicUrl} 
             alt="Background landscape"
             fill
             priority

@@ -2,6 +2,10 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { supabase } from '@/lib/supabase/client'
+
+// Get prospectus image
+const { data :img } = supabase.storage.from('images').getPublicUrl('prospectus/engagez-vous-1.jpg')
 
 export default function Prospectus() {
   const [isFullScreen, setIsFullScreen] = useState(false)
@@ -53,7 +57,7 @@ export default function Prospectus() {
       >
         {/* Image */}
         <Image 
-          src="/engagez-vous-1.jpg?height=800&width=600" 
+          src={img.publicUrl}
           alt="Prospectus Image"
           fill
           className="
@@ -84,7 +88,7 @@ export default function Prospectus() {
         >
           <div className="relative w-full h-full max-w-[95vw] max-h-[95vh]">
             <Image 
-              src="/engagez-vous-1.jpg?height=800&width=600" 
+              src={img.publicUrl}
               alt="Prospectus Image Full Screen"
               fill
               className="object-contain"

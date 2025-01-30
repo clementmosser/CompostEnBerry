@@ -1,20 +1,21 @@
 'use client'
 import Image from 'next/image'
 import Strip from '@/components/Strip/strip'
+import { supabase } from '@/lib/supabase/client'
 
-const logos = [
-  '/logo-alter-incub.png',
-  '/logo-ch-jacques-coeur.png',
-  '/logo-bourges-plus.png',
-  '/logo-bourges.png',
-  '/logo-coeur-de-berry.png',
-  '/logo-credit-agricole.png?height=150&width=150',
-  '/logo-georgia.png',
-  '/logo-sainte-thorette.png',
-  '/logo-smictrem.png',
-]
+// Get list of all images in the folder /partenaires
+const { data, error } = await supabase.storage.from('images').list('partenaires')
+
+const logos: string[] = [];
+
+for (let i=0; i < data?.length; i++ ){
+  const imgInfo=data[i];
+  const { data : dataUrl } = supabase.storage.from("images").getPublicUrl(`partenaires/${imgInfo.name}`);
+  logos.push(dataUrl.publicUrl)
+}
 
 export default function PartnersScroll() {
+  
   return (
     <div>
         <Strip 

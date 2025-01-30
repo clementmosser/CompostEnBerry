@@ -1,8 +1,21 @@
 'use client'
 
 import ClientItem from "./clientItem"
+import { useEffect, useState } from "react"
+import { supabase } from '@/lib/supabase/client'
+import { Database } from '@/types/database.types'
 
 export default function ClientGrid(){
+    const [clients, setClients] = useState<Database['public']['Tables']['clients']['Row'][]>([])
+
+    useEffect(() => {
+    const fetchUsers = async () => {
+        const { data } = await supabase.from('clients').select('*')
+        setClients(data)
+    }
+    
+    fetchUsers()
+    }, [])
 
     return(
         <>
@@ -12,9 +25,17 @@ export default function ClientGrid(){
             
             <div className="flex items-center justify-center bg-beige-berry-100">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <ClientItem backGroundColorClass="bg-green-berry-100" />
-                    <ClientItem backGroundColorClass="bg-yellow-berry-100" />
-                    <ClientItem backGroundColorClass="bg-orange-500" />
+                    {clients.map(client => (
+                        //img = supabase.storage.from('images').getPublicUrl(client.img_name);
+                        //imgUrl = img.publicUrl;
+                        <ClientItem 
+                            key={client.id} 
+                            backGroundColorClass={client.backGroundColorClass} 
+                            name={client.name}
+                            sentences={client.sentences}
+                            imgBg={client.img_url}
+                        />
+                    ))}
                 </div>
             </div>
         </>
