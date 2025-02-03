@@ -46,7 +46,7 @@ export default function ClientItem({backGroundColorClass, name, sentences, imgBg
                         <div className={cn("text-center text-base",isHovered ? "hidden" : "font-medium")}>
                             <p className="pt-2">En savoir plus</p>   
                         </div>
-                        <div className={cn("text-left text-sm",isHovered ? "font-light" : "hidden")}>
+                        <div className={cn("text-left text-sm",isHovered ? "font-normal" : "hidden")}>
                             <ul className="ml-8 mr-4 pb-2 list-disc">
                                 {sentences.map((sentence, index) => (
                                     <li className="mb-2" key={`${sentence} + ${index}`}>{sentence}</li>
