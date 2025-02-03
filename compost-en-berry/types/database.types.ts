@@ -9,6 +9,33 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      actualites: {
+        Row: {
+          cover_photo: string | null
+          created_at: string
+          id: number
+          photo_bucket: string | null
+          text_content: string[]
+          title: string
+        }
+        Insert: {
+          cover_photo?: string | null
+          created_at?: string
+          id?: number
+          photo_bucket?: string | null
+          text_content: string[]
+          title: string
+        }
+        Update: {
+          cover_photo?: string | null
+          created_at?: string
+          id?: number
+          photo_bucket?: string | null
+          text_content?: string[]
+          title?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           backGroundColorClass: string | null
@@ -33,6 +60,27 @@ export type Database = {
           img_url?: string | null
           name?: string
           sentences?: string[] | null
+        }
+        Relationships: []
+      }
+      legal_mentions: {
+        Row: {
+          content: string[] | null
+          created_at: string
+          id: number
+          title: string | null
+        }
+        Insert: {
+          content?: string[] | null
+          created_at?: string
+          id?: number
+          title?: string | null
+        }
+        Update: {
+          content?: string[] | null
+          created_at?: string
+          id?: number
+          title?: string | null
         }
         Relationships: []
       }

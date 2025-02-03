@@ -7,7 +7,7 @@ import { X } from 'lucide-react';
 import Link from "next/link";
 
 export default function Page() {
-  
+
   return (
     <>
       <main>
@@ -34,8 +34,8 @@ export default function Page() {
           normal="Nos"
           wrap="Actualités"
           bgColor= "bg-green-berry-100"
-          txtColor= "text-yellow-berry-100"
-          bgWrap= "bg-yellow-berry-100"
+          txtColor= "text-beige-berry-100"
+          bgWrap= "bg-beige-berry-100"
           bgTxtWrap= "text-green-berry-100" 
         />
         <ActusGrid />
