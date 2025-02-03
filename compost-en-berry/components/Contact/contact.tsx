@@ -8,6 +8,11 @@ const NAV_SECTIONS = [
     { id: 'accueil', label: 'Accueil' }
   ]
 
+function sendMail(email){
+    const mailto = `mailto:${email}`
+    location.href = mailto
+}
+
 export default function Contact(){
 
     const instagramUrl = 'https://www.instagram.com/compostenberry18/'
@@ -94,8 +99,8 @@ export default function Contact(){
                                 <div className="pb-2">
                                     <p>07 84 08 60 02</p>
                                 </div>
-                                <div className="pb-2">
-                                    <p>contact@compostenberry.fr</p>
+                                <div className="pb-2 cursor-pointer">
+                                    <p onClick={() => sendMail("contact@compostenberry.fr")}>contact@compostenberry.fr</p>
                                 </div>
                             </div>
 
