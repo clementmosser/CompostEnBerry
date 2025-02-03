@@ -16,6 +16,10 @@ export default {
   				'100': '#10A29A',
   				'200': '#0B958D'
   			},
+			'orange-berry': {
+  				'100': '#EE964F',
+  				'200': '#E08C48'
+  			},
 			'green-berry-l': {
   				'100': '#F3F6E3',
   				'200': '#E3E6D0'
@@ -27,10 +31,6 @@ export default {
 			'beige-berry': {
   				'100': '#F2E9D9',
   				'200': '#E3DBCC'
-  			},
-			'orange-berry': {
-  				'100': '#EE964F',
-  				'200': '#E08C48'
   			},
 			'helloasso': "#2E2F5E",
 			colors: {

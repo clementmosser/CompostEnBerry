@@ -1,68 +1,62 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
-import ActuComponent from './actuComponent';
+import { useState, useEffect } from 'react'
+import { Database } from "@/types/database.types";
+import { supabase } from "@/lib/supabase/client";
+import Link from 'next/link';
+import './actus.css'
 
-const title="Ceci est un beau titre"
-const texte="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-
+function dateFormat(date){
+    const newDate = new Date(date)
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        const formattedDate = new Intl.DateTimeFormat('fr-FR', options).format(newDate);
+        return formattedDate;
+}
 
 export default function ActusGrid() {
-    const [selectedImage, setSelectedImage] = useState<string | null>(null)
-
-    const images = [
-        '/photo1.png?height=300&width=300',
-        '/photo2.png?height=300&width=300',
-        '/photo3.png?height=300&width=300',
-        '/photo4.png?height=300&width=300',
-        '/photo5.png?height=300&width=300',    
-        '/photo1.png?height=300&width=300',    
-        '/photo2.png?height=300&width=300',    
-        '/photo3.png?height=300&width=300',
-        '/photo4.png?height=300&width=300'
-    ]
-
+    const [actus, setActus] = useState<Database['public']['Tables']['actualites']['Row'][]>([])
+  
+    useEffect(() => {
+    const fetchActus = async () => {
+        const { data } = await supabase.from('actualites').select('*')
+        setActus(data)
+    }
+    
+    fetchActus()
+    }, [])
+  
   return (
-    <div className="px-8 py-16 h-fit min-h-screen bg-yellow-berry-100">
+    <div className="px-2 py-10 h-fit min-h-screen bg-beige-berry-100">
         <div className="flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-5/6">
-                {images.map((src, index) => (
-                    <div 
-                        key={`press + ${index}`} 
-                        className="aspect-square overflow-hidden hover:grayscale rounded-lg"
-                        onClick={() => setSelectedImage(src)}
-                    >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 w-11/12">
+                {actus.map((actu, index) => (
+                    <div key={`Actu: + ${index}`} className="aspect-video relative overflow-hidden hover:saturate-50 hover:drop-shadow-xl rounded-xl" >
+                    <Link href={`/actualites/${actu.id}`}>
                         <Image 
-                            src={src} 
+                            src={actu.cover_photo} 
                             width={150}
                             height={150}
                             alt={`Gallery image ${index + 1}`} 
-                            className="w-full h-full object-cover"
+                            className="w-full h-full absolute object-cover"
                         />
+                        
+                        {/* Centered Text Container */}
+                        <div className="relative z-20 flex items-end h-full text-background">
+                            <div className="text-white text-left max-w-2xl">
+                                <p className='text-xs sm:text-sm md:text-md font-light mx-4 mb-2'>
+                                    {dateFormat(actu.created_at)}
+                                </p>
+                                <h1 className="text-normal sm:text-normal md:text-lg font-semibold mx-4 mb-6">
+                                    {actu.title}
+                                </h1>
+                            </div>
+                        </div>
+                    </Link>
                     </div>
+                    
                 ))}
             </div>
-            {selectedImage && (
-                <div 
-                  className="
-                    fixed 
-                    inset-0 
-                    z-50 
-                    bg-white/70 
-                    flex 
-                    items-center 
-                    justify-center 
-                    p-8"
-                  onClick={() => setSelectedImage(null)}
-                >
-                    <ActuComponent
-                        srcActu={selectedImage}
-                        titleActu={title}
-                        txtActu={texte}
-                    />
-                </div>
-            )}
         </div>
     </div>
   )
