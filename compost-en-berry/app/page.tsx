@@ -33,7 +33,7 @@ export default function Page() {
     <>
     <Header />
       <main>
-        <div id="accueil" className="bg-fixed h-screen relative w-full overflow-hidden">
+        <div id="accueil" className="bg-fixed h-screen relative w-full overflow-hidden bg-orange-berry-100">
           {/* Background Image */}
           <Image 
             src={background.publicUrl} 
