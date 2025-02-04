@@ -1,11 +1,11 @@
 'use client'
 
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import './client.css'
 
-export default function ClientItem(option: {backGroundColorClass: string, name: string, sentences: Array<string>, imgBg: string}) {
+export default function ClientItem(option: {backGroundColorClass: string, name: string, sentences: string[], imgBg: string}) {
     const [isHovered, setIsHovered] = useState(false)
   return (
     <div className="card-size justify-center flex drop-shadow-xl">
@@ -47,7 +47,7 @@ export default function ClientItem(option: {backGroundColorClass: string, name: 
                         </div>
                         <div className={cn("text-left text-sm",isHovered ? "font-normal" : "hidden")}>
                             <ul className="ml-8 mr-4 pb-2 list-disc">
-                                {option.sentences.map((sentence: string, index: any) => (
+                                {option.sentences.map((sentence: string, index: number) => (
                                     <li className="mb-2" key={`${sentence} + ${index}`}>{sentence}</li>
                                 ))}
                             </ul>
