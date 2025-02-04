@@ -19,7 +19,7 @@ export default function ActusGrid() {
   
     useEffect(() => {
     const fetchActus = async () => {
-        const { data } = await supabase.from('actualites').select('*')
+        const { data } = await supabase.from('actualites').select('*').order('created_at', {ascending: false})
         setActus(data)
     }
     
@@ -35,8 +35,8 @@ export default function ActusGrid() {
                     <Link href={`/actualites/${actu.id}`}>
                         <Image 
                             src={actu.cover_photo} 
-                            width={150}
-                            height={150}
+                            width={1000}
+                            height={1000}
                             alt={`Gallery image ${index + 1}`} 
                             className="w-full h-full absolute object-cover"
                         />
