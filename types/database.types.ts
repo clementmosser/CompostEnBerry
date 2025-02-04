@@ -43,7 +43,7 @@ export type Database = {
           id: number
           img_url: string | null
           name: string
-          sentences: string[] | null
+          sentences: string[]
         }
         Insert: {
           backGroundColorClass?: string | null
@@ -51,7 +51,7 @@ export type Database = {
           id?: number
           img_url?: string | null
           name: string
-          sentences?: string[] | null
+          sentences: string[]
         }
         Update: {
           backGroundColorClass?: string | null
@@ -59,7 +59,7 @@ export type Database = {
           id?: number
           img_url?: string | null
           name?: string
-          sentences?: string[] | null
+          sentences?: string[]
         }
         Relationships: []
       }

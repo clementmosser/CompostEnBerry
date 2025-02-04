@@ -34,10 +34,10 @@ export default function ClientGrid(){
                         //imgUrl = img.publicUrl;
                         <ClientItem 
                             key={client.id} 
-                            backGroundColorClass={client.backGroundColorClass} 
+                            backGroundColorClass={`${client.backGroundColorClass}`} 
                             name={client.name}
                             sentences={client.sentences}
-                            imgBg={client.img_url}
+                            imgBg={`${client.img_url}`}
                         />
                     ))}
                 </div>
