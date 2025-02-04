@@ -19,7 +19,7 @@ export default function ActusGrid() {
   
     useEffect(() => {
     const fetchActus = async () => {
-        const { data } = await supabase.from('actualites').select('*').order('created_at', {ascending: false})
+        const { data } = await supabase.from('actualites').select('*').order('created_at', {ascending: true})
         setActus(data)
     }
     
