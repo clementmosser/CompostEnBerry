@@ -8,10 +8,15 @@ const { data, error } = await supabase.storage.from('images').list('partenaires'
 
 const logos: string[] = [];
 
-for (let i=0; i < data?.length; i++ ){
-  const imgInfo=data[i];
-  const { data : dataUrl } = supabase.storage.from("images").getPublicUrl(`partenaires/${imgInfo.name}`);
-  logos.push(dataUrl.publicUrl)
+if (error){
+  console.log("Erreur lors du chargement des images des partenaires")
+  console.log(error)
+} else {
+  for (let i=0; i < data?.length; i++ ){
+    const imgInfo=data[i];
+    const { data : dataUrl } = supabase.storage.from("images").getPublicUrl(`partenaires/${imgInfo.name}`);
+    logos.push(dataUrl.publicUrl)
+  }
 }
 
 export default function PartnersScroll() {

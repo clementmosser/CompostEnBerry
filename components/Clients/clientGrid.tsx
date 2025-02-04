@@ -10,8 +10,12 @@ export default function ClientGrid(){
 
     useEffect(() => {
     const fetchUsers = async () => {
-        const { data } = await supabase.from('clients').select('*')
-        setClients(data)
+        const { data, error } = await supabase.from('clients').select('*')
+        if ( data !== null ){
+            setClients(data)
+        } else {
+            console.log(error)
+        }
     }
     
     fetchUsers()

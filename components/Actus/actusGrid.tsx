@@ -7,10 +7,9 @@ import { supabase } from "@/lib/supabase/client";
 import Link from 'next/link';
 import './actus.css'
 
-function dateFormat(date){
+function dateFormat(date: string | number | Date){
     const newDate = new Date(date)
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const formattedDate = new Intl.DateTimeFormat('fr-FR', options).format(newDate);
+        const formattedDate = new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'short', day: 'numeric' }).format(newDate);
         return formattedDate;
 }
 
@@ -19,8 +18,12 @@ export default function ActusGrid() {
   
     useEffect(() => {
     const fetchActus = async () => {
-        const { data } = await supabase.from('actualites').select('*').order('created_at', {ascending: true})
-        setActus(data)
+        const { data , error } = await supabase.from('actualites').select('*').order('created_at', {ascending: true})
+        if (data !== null){
+            setActus(data)
+        } else {
+            console.log(error)
+        }
     }
     
     fetchActus()
@@ -34,7 +37,7 @@ export default function ActusGrid() {
                     <div key={`Actu: + ${index}`} className="aspect-video relative overflow-hidden hover:saturate-50 hover:drop-shadow-xl rounded-xl" >
                     <Link href={`/actualites/${actu.id}`}>
                         <Image 
-                            src={actu.cover_photo} 
+                            src={`${actu.cover_photo}`} 
                             width={1000}
                             height={1000}
                             alt={`Gallery image ${index + 1}`} 
