@@ -10,8 +10,12 @@ export default function LegalMentions() {
   
       useEffect(() => {
       const fetchUsers = async () => {
-          const { data } = await supabase.from('legal_mentions').select('*')
-          setLegalMentions(data)
+          const { data, error } = await supabase.from('legal_mentions').select('*')
+          if( data !== null ){
+            setLegalMentions(data)
+          } else {
+            console.log(error)
+          }
       }
       
       fetchUsers()

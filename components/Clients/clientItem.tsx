@@ -1,13 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import './client.css'
 
-export default function ClientItem({backGroundColorClass, name, sentences, imgBg}) {
+export default function ClientItem(option: {backGroundColorClass: string, name: string, sentences: Array<string>, imgBg: string}) {
     const [isHovered, setIsHovered] = useState(false)
-    
   return (
     <div className="card-size justify-center flex drop-shadow-xl">
         <div className="relative w-full h-auto my-2">
@@ -22,7 +21,7 @@ export default function ClientItem({backGroundColorClass, name, sentences, imgBg
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                 <Image 
-                    src={imgBg}
+                    src={option.imgBg}
                     alt="Card Background"
                     fill
                     className="object-cover"
@@ -32,7 +31,7 @@ export default function ClientItem({backGroundColorClass, name, sentences, imgBg
                 {/* Text Section */}
                 <div 
                 className={cn(
-                    `absolute bottom-0 left-0 right-0 ${backGroundColorClass} text-colors-berry-green-l`,
+                    `absolute bottom-0 left-0 right-0 ${option.backGroundColorClass} text-colors-berry-green-l`,
                     "transition-all duration-300 ease-in-out",
                     isHovered ? "h-3/4" : "h-1/5" // Grow text section on hover
                 )}
@@ -40,7 +39,7 @@ export default function ClientItem({backGroundColorClass, name, sentences, imgBg
                     <div className="text-center">
                         <span className="before:block before:absolute before:-inset-2 before:-skew-y-2 before:bg-green-berry-l-100 relative inline-block mb-6 px-1">
                             <h3 className="relative uppercase text-colors-berry-green font-semibold">
-                            Pour les {name}
+                            Pour les {option.name}
                             </h3>
                         </span>
                         <div className={cn("text-center text-base",isHovered ? "hidden" : "font-medium")}>
@@ -48,7 +47,7 @@ export default function ClientItem({backGroundColorClass, name, sentences, imgBg
                         </div>
                         <div className={cn("text-left text-sm",isHovered ? "font-normal" : "hidden")}>
                             <ul className="ml-8 mr-4 pb-2 list-disc">
-                                {sentences.map((sentence, index) => (
+                                {option.sentences.map((sentence: string, index: any) => (
                                     <li className="mb-2" key={`${sentence} + ${index}`}>{sentence}</li>
                                 ))}
                             </ul>

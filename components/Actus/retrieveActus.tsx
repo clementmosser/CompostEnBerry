@@ -6,14 +6,24 @@ import { Database } from '@/types/database.types'
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { StaticImport } from "next/dist/shared/lib/get-img-props"
 
 const CDNURL = "https://nnuroccvvykhyoxideoi.supabase.co/storage/v1/object/public/images/"
+
+interface MyBucket {
+  name: string;
+  id: string;
+  updated_at: string;
+  created_at: string;
+  last_accessed_at: string;
+  metadata: Record<string, any>;
+}
 
 export default function RetrieveActus(info: {actuId : number}) {
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const [actus, setActus] = useState<Database['public']['Tables']['actualites']['Row'][]>([])
-    const [images, setImages ] = useState([])
+    const [images , setImages ] = useState<MyBucket[]>([]);
 
     const handleNext = () => {
       setCurrentIndex((prevIndex) => 
@@ -30,8 +40,12 @@ export default function RetrieveActus(info: {actuId : number}) {
     // Retrieve the actu information to display
     useEffect(() => {
     const fetchActus = async () => {
-        const { data } = await supabase.from('actualites').select('*').eq('id', info.actuId)
-        setActus(data)
+        const { data, error } = await supabase.from('actualites').select('*').eq('id', info.actuId)
+        if (error){
+          console.log(error)
+        } else {
+          setActus(data)
+        }
     }
     fetchActus()
     }, [])
@@ -40,7 +54,7 @@ export default function RetrieveActus(info: {actuId : number}) {
     let bucketName = ""
     async function getBucket() {
       actus.map((buck) => (
-        bucketName=buck.photo_bucket
+        bucketName=`${buck.photo_bucket}`
       ))
     } 
     getBucket()
@@ -48,21 +62,23 @@ export default function RetrieveActus(info: {actuId : number}) {
     // Get images from bucket
     useEffect(() => {
       const getImages = async () => {
-        const { data , error } = await supabase
-        .storage
-        .from('images')
-        .list(bucketName);
+        if(bucketName !== ""){
+          const { data, error } = await supabase
+          .storage
+          .from('images')
+          .list(bucketName);
 
-        if(data !== null){
-          setImages(data);
-        } else {
-          console.log(error);
+          if(data !== null){
+            setImages(data);
+          } else {
+            console.log(error);
+          }
         }
       }
       getImages()
     })
 
-    let imagesUrl = []
+    const imagesUrl: (string | StaticImport)[] = []
     images.map((image) => {
       return (
         imagesUrl.push(CDNURL + bucketName + "/" + image.name)

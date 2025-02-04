@@ -8,7 +8,7 @@ const NAV_SECTIONS = [
     { id: 'accueil', label: 'Accueil' }
   ]
 
-function sendMail(email){
+function sendMail(email: string){
     const mailto = `mailto:${email}`
     location.href = mailto
 }
