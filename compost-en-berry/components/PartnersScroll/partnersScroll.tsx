@@ -45,8 +45,8 @@ export default function PartnersScroll() {
                   src={logo} 
                   alt={`Logo ${index + 1}`} 
                   width={100} 
-                  height={100} 
-                  className="h-20 m-auto size-full transition-all hover:grayscale hover:opacity-50"
+                  height={150} 
+                  className="h-20 m-auto size-full hover:saturate-50"
                 />
             ))}
             </div>
