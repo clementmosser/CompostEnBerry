@@ -27,9 +27,9 @@ export default function SecondHeader() {
           <Image 
             src={logo} 
             alt="Logo" 
-            width={150} 
-            height={150} 
-            className="h-15 w-auto"
+            width={200} 
+            height={200} 
+            className="-16 py-2 w-auto"
           />
         </Link>
 
