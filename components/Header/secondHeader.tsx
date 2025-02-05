@@ -29,7 +29,7 @@ export default function SecondHeader() {
             alt="Logo" 
             width={200} 
             height={200} 
-            className="-16 py-2 w-auto"
+            className="h-16 py-2 w-auto"
           />
         </Link>
 
