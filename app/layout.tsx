@@ -19,6 +19,9 @@ export default function DashboardLayout({
 }) {
   return (
     <html lang="fr">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body>
           {children}
       </body>
