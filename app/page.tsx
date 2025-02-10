@@ -15,7 +15,8 @@ import Footer from "@/components/Footer/footer"
 import { supabase } from "@/lib/supabase/client"
 
 // Get prospectus image
-const { data : background } = supabase.storage.from('images').getPublicUrl('background/logo-fond-terre.jpeg')
+const { data : background } = supabase.storage.from('images').getPublicUrl('background/logo-fond-terre.png')
+const { data : logoBackground } = supabase.storage.from('images').getPublicUrl('background/logo-CEB-blanc.png')
 
 export default function Page() {
   const targetRef = useRef<HTMLDivElement>(null)
@@ -42,14 +43,24 @@ export default function Page() {
             priority
             className="absolute inset-0 z-0 object-cover brightness-50"
           />
+          {/* Centered Image */}
+          <div className="relative z-10 flex items-center justify-center h-full">
+            <Image 
+              src={logoBackground.publicUrl} 
+              alt="Background logo"
+              width={1000} 
+              height={1000} 
+              className="max-w-[80%] max-h-[80%] object-contain"
+            />
+          </div>
 
           {/* Scroll Button*/}
-          <div className="h-screen flex items-end justify-center bg-green-berry-100">
+          <div className="absolute flex justify-center bottom-0 left-0 right-0 p-6 z-20">
               <Button 
                 onClick={handleScroll} 
                 variant="outline" 
                 size="icon" 
-                className="rounded-full size-14 mt-8 mb-10 border-0 animate-bounce bg-green-berry-100 hover:bg-green-berry-200"
+                className="rounded-full flex justify-center w-full size-14 mt-8 mb-6 border-0 animate-bounce bg-green-berry-100 hover:bg-green-berry-200"
               >
                 <ChevronDown className="h-6 w-6" />
               </Button>
