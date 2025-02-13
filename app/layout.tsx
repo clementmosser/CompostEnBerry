@@ -9,7 +9,13 @@ export const metadata: Metadata = {
   },
   description: 'Compostage de proximité et collecte des biodéchets',
   icons: {
-    icon: '/favicon.ico'
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.ico'},
+    ],
+    apple: [
+      { url: '/apple-icon.png' },
+    ],
   },
   openGraph: {
     title: "Compost'en Berry / Compostage et collecte des biodéchets",
