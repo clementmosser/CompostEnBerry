@@ -9,11 +9,17 @@ export const metadata: Metadata = {
   },
   description: 'Compostage de proximité et collecte des biodéchets',
   icons: {
-    icon: '/favicon.ico'
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.ico'},
+    ],
+    apple: [
+      { url: '/apple-icon.png' },
+    ],
   },
   openGraph: {
     title: "Compost'en Berry / Compostage et collecte des biodéchets",
-    description: "Compost'en Berry c'est de l'animation, du suivi et l'installation de composteurs collectifs et un service de collecte des biodéchets pour les établissements de restauration collective.",
+    description: "Compost'en Berry c'est de l'animation et un service de collecte des biodéchets pour les établissements de restauration collective.",
     url: 'https://www.compostenberry.fr',
     siteName: "Compost'en Berry",
     images: [
