@@ -1,23 +1,6 @@
 'use client'
-import Image from 'next/image'
 import Strip from '@/components/Strip/strip'
-import { supabase } from '@/lib/supabase/client'
-
-// Get list of all images in the folder /partenaires
-const { data, error } = await supabase.storage.from('images').list('partenaires')
-
-const logos: string[] = [];
-
-if (error){
-  console.log("Erreur lors du chargement des images des partenaires")
-  console.log(error)
-} else {
-  for (let i=0; i < data?.length; i++ ){
-    const imgInfo=data[i];
-    const { data : dataUrl } = supabase.storage.from("images").getPublicUrl(`partenaires/${imgInfo.name}`);
-    logos.push(dataUrl.publicUrl)
-  }
-}
+import PartnersList from './partnersList'
 
 export default function PartnersScroll() {
   
@@ -30,31 +13,14 @@ export default function PartnersScroll() {
           txtColor= "text-yellow-berry-100"
           bgWrap= "bg-yellow-berry-100"
           bgTxtWrap= "text-green-berry-100" 
-        />
+        /> 
         <div className="w-full overflow-x-hidden py-12">
-            <div className="flex animate-scroll gap-16 whitespace-nowrap">  
-            {logos.map((logo, index) => (
-                <Image 
-                  key={index} 
-                  src={logo} 
-                  alt={`Logo ${index + 1}`} 
-                  width={100} 
-                  height={150} 
-                  className="h-20 m-auto size-full hover:saturate-50"
-                />
-            ))}
-            {/* Duplicate logos for infinite scroll effect */}
-            {logos.map((logo, index) => (
-                <Image 
-                  key={`duplicate-${index}`} 
-                  src={logo} 
-                  alt={`Logo ${index + 1}`} 
-                  width={100} 
-                  height={150} 
-                  className="h-20 m-auto size-full hover:saturate-50"
-                />
-            ))}
-            </div>
+          <div className="flex animate-scroll gap-16 whitespace-nowrap"> 
+            <PartnersList />
+            <PartnersList />
+            <PartnersList />
+            <PartnersList />
+          </div>
         </div>
     </div>
     
