@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useRef } from 'react'
 import Leaflets from "@/components/Leaflets/leaflets"
@@ -32,8 +32,9 @@ export default function Page() {
 
   return (
     <>
-    <Header />
+      <Header />
       <main>
+        {/* Accueil */}
         <div id="accueil" className="bg-fixed h-screen relative w-full overflow-hidden bg-orange-berry-100">
           {/* Background Image */}
           <Image 
@@ -66,24 +67,39 @@ export default function Page() {
               </Button>
           </div>
         </div>
+
+        {/* Affichage des préstations en fonctions des clients */}
         <div ref={targetRef}>
           <ClientGrid />
         </div>
-        
-        <Prospectus />
-        <Leaflets />
-        <PartnersScroll />
-        <div id="joinus"><Helloasso /></div>
-        <div id="contact"><Contact/></div>
 
-        <Button 
-          className="rounded-full fixed bottom-4 left-4 z-50 bg-green-berry-100/50 hover:bg-green-berry-200/80" 
-          size="icon"
-          onClick={handleScroll}
-        >
-          <ChevronUp className="h-6 w-6" />
-        </Button>
+        {/* Prospectus */}
+        <div>
+          <Prospectus />
+        </div>
+
+        {/* Dépliants */}
+        <div>
+          <Leaflets />
+        </div>
+
+        {/* Scroll des partenaires */}
+        <div>
+          <PartnersScroll />
+        </div>
+
+        {/* Formulaire HelloAsso */}
+        <div id="joinus">
+          <Helloasso />
+        </div>
+
+        {/* Contacts */}
+        <div id="contact">
+          <Contact/>
+        </div>
+
       </main>
+
       <Footer />
     </>
     
