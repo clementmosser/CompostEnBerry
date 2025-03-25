@@ -12,10 +12,9 @@ export default function PartnersScroll() {
   const fetchTitlePartners = async () => {
       const { data , error } = await supabase.from('titles').select('*').eq('component_name','partners')
       if (data !== null){
-        console.log(data)
         setTitlePartners(data)
       } else {
-          console.log(error)
+        console.log(error)
       }
   }
   

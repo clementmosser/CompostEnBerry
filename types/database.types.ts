@@ -36,6 +36,39 @@ export type Database = {
         }
         Relationships: []
       }
+      adhesion_goals: {
+        Row: {
+          id: number
+          text: string[] | null
+          title: string | null
+        }
+        Insert: {
+          id?: number
+          text?: string[] | null
+          title?: string | null
+        }
+        Update: {
+          id?: number
+          text?: string[] | null
+          title?: string | null
+        }
+        Relationships: []
+      }
+      adhesion_presentation: {
+        Row: {
+          id: number
+          text: string[] | null
+        }
+        Insert: {
+          id?: number
+          text?: string[] | null
+        }
+        Update: {
+          id?: number
+          text?: string[] | null
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           backGroundColorClass: string | null

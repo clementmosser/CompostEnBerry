@@ -21,10 +21,9 @@ export default function Leaflets() {
   const fetchTitleLeaflet = async () => {
       const { data , error } = await supabase.from('titles').select('*').eq('component_name','leaflets')
       if (data !== null){
-        console.log(data)
-          setTitleLeaflet(data)
+        setTitleLeaflet(data)
       } else {
-          console.log(error)
+        console.log(error)
       }
   }
   
