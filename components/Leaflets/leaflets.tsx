@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import Strip from '../Strip/strip'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/client'
+import { Database } from '@/types/database.types'
 
 // Get leaflets images
 const { data :img1 } = supabase.storage.from('images').getPublicUrl('leaflets/depliant-1.jpg')
@@ -14,7 +15,20 @@ const { data :img2 } = supabase.storage.from('images').getPublicUrl('leaflets/de
 export default function Leaflets() {
   const [isFullScreen, setIsFullScreen] = useState(false)
   const [isFullScreen2, setIsFullScreen2] = useState(false)
-
+  const [titleLeaflet, setTitleLeaflet] = useState<Database['public']['Tables']['titles']['Row'][]>([])
+    
+  useEffect(() => {
+  const fetchTitleLeaflet = async () => {
+      const { data , error } = await supabase.from('titles').select('*').eq('component_name','leaflets')
+      if (data !== null){
+        setTitleLeaflet(data)
+      } else {
+        console.log(error)
+      }
+  }
+  
+  fetchTitleLeaflet()
+  }, [])
 
   const toggleFullScreen = () => {
     setIsFullScreen(!isFullScreen)
@@ -26,15 +40,17 @@ export default function Leaflets() {
 
   return (
     <>
-    <Strip 
-      normal="nos dépliants de "
-      wrap="présentation"
-      bgColor= "bg-beige-berry-100"
-      txtColor= "text-green-berry-100"
-      bgWrap= "bg-green-berry-100"
-      bgTxtWrap= "text-beige-berry-100" 
-    >
-    </Strip>
+      {titleLeaflet.map((title)=>(
+        <Strip 
+          key={title.id}
+          normal={title.title_normal}
+          wrap={title.title_wrap}
+          bgColor= "bg-beige-berry-100"
+          txtColor= "text-green-berry-100"
+          bgWrap= "bg-green-berry-100"
+          bgTxtWrap= "text-beige-berry-100" 
+        />
+      ))}
 
     {/* Dépliant 1 */}
     <div 
@@ -176,6 +192,5 @@ export default function Leaflets() {
     {/* Bandeau de séparation*/}
     <div className="relative h-2 bg-beige-berry-100"></div>
     </>
-    
   )
 }

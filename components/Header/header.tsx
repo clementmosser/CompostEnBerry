@@ -4,8 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import logo from '../../public/logo-berry.png'
-import { useState, useEffect, useCallback } from 'react'
-import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import { Button } from '../ui/button'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -16,36 +15,7 @@ const NAV_SECTIONS = [
 ]
 
 export default function Header() {
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const handleScroll = useCallback(() => {
-    const currentScrollY = window.scrollY
-    
-    // Determine scroll direction
-    if (currentScrollY > lastScrollY) {
-      // Scrolling down
-      setIsVisible(false)
-    } else {
-      // Scrolling up
-      setIsVisible(true)
-    }
-
-    // Update last scroll position
-    setLastScrollY(currentScrollY)
-  }, [lastScrollY])
-
-  useEffect(() => {
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll)
-
-    // Cleanup listener on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [handleScroll])
-
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
@@ -63,10 +33,7 @@ export default function Header() {
   return (
     // className="top-0 z-50 bg-white shadow-sm"
     <header 
-      className={cn("fixed top-0 left-0 w-full z-50 bg-white shadow-md transition-all duration-300 ease-in-out",
-      // Translate header up when not visible
-      !isVisible && "-translate-y-full"
-    )}>
+      className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-sm shadow-md transition-all duration-300 ease-in-out">
       <div className="container mx-auto flex items-center justify-between py-1 px-4 md:px-6 lg:px-2">
         {/* Logo */}
         <Link href="/" className="flex items-center">

@@ -3,8 +3,8 @@
 
 export default function Strip(
   text: {
-    normal: string,
-    wrap: string, 
+    normal: string | null,
+    wrap: string | null, 
     bgColor: string, 
     txtColor: string, 
     bgWrap: string, 
