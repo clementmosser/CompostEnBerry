@@ -39,7 +39,7 @@ export default function ClientItem(option: {backGroundColorClass: string, name: 
                     <div className="text-center">
                         <span className="before:block before:absolute before:-inset-2 before:-skew-y-2 before:bg-green-berry-l-100 relative inline-block mb-6 px-1">
                             <h3 className="relative uppercase text-colors-berry-green font-semibold">
-                            Pour les {option.name}
+                            {option.name}
                             </h3>
                         </span>
                         <div className={cn("text-center text-base",isHovered ? "hidden" : "font-medium")}>

@@ -24,7 +24,7 @@ export default function ClientGrid(){
     return(
         <>
             <div className="flex text-center justify-center bg-beige-berry-100 text-colors-berry-green text-normal sm:text-lg md:text-2xl font-bold">
-                <h1 className="w-3/4 pt-6">Pour tous vos projets de compostage dans le Berry (18 et 36), l’association Compost’en Berry vous accompagne.</h1>
+                <h1 className="w-3/4 py-10">Depuis 2021, l'association Compost'en Berry vous accompagne.</h1>
             </div>
             
             <div className="flex items-center justify-center bg-beige-berry-100">

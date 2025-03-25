@@ -46,15 +46,21 @@ export default function Page() {
           />
           {/* Centered Image */}
           <div className="relative z-10 flex items-center justify-center h-full">
-            <Image 
-              src={logoBackground.publicUrl} 
-              alt="Background logo"
-              width={1000} 
-              height={1000} 
-              className="max-w-[80%] max-h-[80%] object-contain"
-            />
+            <div className="w-full">
+              <div className="flex justify-center">
+                <Image 
+                  src={logoBackground.publicUrl} 
+                  alt="Background logo"
+                  width={1000} 
+                  height={1000} 
+                  className="max-w-[80%] max-h-[80%] object-contain"
+                />
+              </div>
+              <h1 className="text-white text-xl lg:text-3xl pt-6 z-10 flex justify-center">
+                De l'assiette à la terre
+              </h1>
+            </div>
           </div>
-
           {/* Scroll Button*/}
           <div className="absolute flex justify-center bottom-0 left-0 right-0 p-6 z-20">
               <Button 

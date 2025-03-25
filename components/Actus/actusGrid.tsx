@@ -57,7 +57,6 @@ export default function ActusGrid() {
                         </div>
                     </Link>
                     </div>
-                    
                 ))}
             </div>
         </div>

@@ -105,6 +105,27 @@ export type Database = {
         }
         Relationships: []
       }
+      titles: {
+        Row: {
+          component_name: string | null
+          id: number
+          title_normal: string | null
+          title_wrap: string | null
+        }
+        Insert: {
+          component_name?: string | null
+          id?: number
+          title_normal?: string | null
+          title_wrap?: string | null
+        }
+        Update: {
+          component_name?: string | null
+          id?: number
+          title_normal?: string | null
+          title_wrap?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
