@@ -66,13 +66,17 @@ export default function Helloasso() {
       ))}
 
       <div className="flex items-center justify-center py-10 border-none">
-        {presentation.map((presentation)=>(
-          <p 
-            key={presentation.id}
-            className='w-4/5 text-justify text-white'
-          >
-            {presentation.text}
-          </p>
+        {presentation.map((pres)=>(
+          <div key={pres.id} className='w-4/5 text-justify text-white'>
+            {(pres.text ?? []).map((sentence, index)=>(
+              <p 
+                key={`Sentence+ ${index}`}
+                className='pb-3'
+              >
+                {sentence}
+              </p>   
+        ))}
+          </div>
         ))}
       </div>
 
@@ -105,7 +109,7 @@ function GoalItem(item: {id: number, title: string | null, text: string[] | null
           {item.title}
         </h1>
         <div className='flex items-center justify-center'>
-          <ul className="w-4/5 ml-8 mr-4 pb-2 list-disc">
+          <ul className="w-4/5 ml-8 mr-4 pb-2 list-disc xl:px-20">
               {item.text.map((text: string, index: number) => (
                   <li className="mb-2" key={`${text} + ${index}`}>{text}</li>
               ))}

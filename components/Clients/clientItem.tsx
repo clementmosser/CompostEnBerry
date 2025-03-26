@@ -14,7 +14,7 @@ export default function ClientItem(option: {backGroundColorClass: string, name: 
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 className={cn(
-                `relative overflow-scroll pb-4 scale-95 shadow-2xl rounded-xl transition-all duration-300 ease-in-out`,
+                `relative overflow-scroll no-scrollbar pb-4 scale-95 shadow-2xl rounded-xl transition-all duration-300 ease-in-out`,
                 " w-full h-full", // Default size
                 )}
             >
@@ -45,7 +45,7 @@ export default function ClientItem(option: {backGroundColorClass: string, name: 
                         <div className={cn("text-center text-base",isHovered ? "hidden" : "font-medium")}>
                             <p className="pt-2">En savoir plus</p>   
                         </div>
-                        <div className={cn("text-left text-sm",isHovered ? "font-normal" : "hidden")}>
+                        <div className={cn(`text-left text-sm ${option.backGroundColorClass}`,isHovered ? "font-normal" : "hidden")}>
                             <ul className="ml-8 mr-4 pb-2 list-disc">
                                 {option.sentences.map((sentence: string, index: number) => (
                                     <li className="mb-2" key={`${sentence} + ${index}`}>{sentence}</li>

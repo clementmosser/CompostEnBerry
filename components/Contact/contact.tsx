@@ -2,29 +2,7 @@ import Strip from "../Strip/strip";
 import Link from "next/link";
 import './contact.css'
 
-// Define the sections for navigation
-const NAV_SECTIONS = [
-    { id: 'accueil', label: 'Accueil' }
-  ]
-
-function sendMail(email: string){
-    const mailto = `mailto:${email}`
-    location.href = mailto
-}
-
 export default function Contact(){
-
-    // Smooth scroll function
-    const scrollToSection = (sectionId: string) => {
-        const element = document.getElementById(sectionId)
-        if (element) {
-        element.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-        })
-        }
-    }
-
     return (
         <>
             <div className="flex">
@@ -37,9 +15,9 @@ export default function Contact(){
                         bgWrap= "bg-yellow-berry-100"
                         bgTxtWrap= "text-beige-berry-100" 
                     />
-                    <div className="flex justify-around">
-                        <div className="flex w-full px-6 py-4 gap-10 justify-center text-sm md:text-md">
-                            <div className="text-helloasso">
+                    <div className="flex justify-center md:justify-around">
+                        <div className="grid grid-cols-2 w-full px-6 py-4 gap-3 sm:gap-10 text-sm md:text-md text-helloasso">
+                            <div className="sm:text-end">
                                 <div className="pb-2">
                                     <p className="font-bold">Compost&apos;en Berry</p>
                                     <p>28 rue Gambon, 18000 Bourges</p>
@@ -53,7 +31,7 @@ export default function Contact(){
                                 </div>
                             </div>
 
-                            <div className="text-gray-700">
+                            <div>
                                 {NAV_SECTIONS.map((section) => (
                                     <div 
                                         key={(section.id, section.label)}
@@ -75,4 +53,25 @@ export default function Contact(){
             </div>
         </>
     );
+}
+
+// Define the sections for navigation
+const NAV_SECTIONS = [
+    { id: 'accueil', label: 'Accueil' }
+  ]
+
+function sendMail(email: string){
+    const mailto = `mailto:${email}`
+    location.href = mailto
+}
+
+// Smooth scroll function
+const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+    element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+    })
+    }
 }
