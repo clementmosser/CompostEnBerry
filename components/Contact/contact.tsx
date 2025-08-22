@@ -1,8 +1,26 @@
 import Strip from "../Strip/strip";
 import Link from "next/link";
 import './contact.css'
+import { useEffect, useState } from "react"
+import { supabase } from '@/lib/supabase/client'
+import { Database } from '@/types/database.types'
 
 export default function Contact(){
+    const [contacts, setContact] = useState<Database['public']['Tables']['contact']['Row'][]>([])
+    
+        useEffect(() => {
+        const fetchUsers = async () => {
+            const { data, error } = await supabase.from('contact').select('*')
+            if ( data !== null ){
+                setContact(data)
+            } else {
+                console.log(error)
+            }
+        }
+        
+        fetchUsers()
+        }, [])
+    
     return (
         <>
             <div className="flex">
@@ -18,17 +36,21 @@ export default function Contact(){
                     <div className="flex justify-center md:justify-around">
                         <div className="grid grid-cols-2 w-full px-6 py-4 gap-3 sm:gap-10 text-sm md:text-md text-helloasso">
                             <div className="sm:text-end">
-                                <div className="pb-2">
-                                    <p className="font-bold">Compost&apos;en Berry</p>
-                                    <p>28 rue Gambon, 18000 Bourges</p>
-                                    <p>FRANCE</p>
-                                </div>
-                                <div className="pb-2">
-                                    <p>07 84 08 60 02</p>
-                                </div>
-                                <div className="pb-2 cursor-pointer">
-                                    <p onClick={() => sendMail("contact@compostenberry.fr")}>contact@compostenberry.fr</p>
-                                </div>
+                                {contacts.map((contact, index) => (
+                                    <div key={index}>
+                                        <div className="pb-2">
+                                            <p className="font-bold">{contact.name}</p>
+                                            <p>{contact.adress}</p>
+                                            <p>{contact.country}</p>
+                                        </div>
+                                        <div className="pb-2">
+                                            <p>{contact.tel}</p>
+                                        </div>
+                                        <div className="pb-2 cursor-pointer">
+                                            <p onClick={() => sendMail(`${contact.mail}`)}>{contact.mail}</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
 
                             <div>
